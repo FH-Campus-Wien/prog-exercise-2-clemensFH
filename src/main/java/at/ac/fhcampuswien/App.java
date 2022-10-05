@@ -12,27 +12,25 @@ public class App {
     //todo Task 1
     public void largestNumber(){
         int counter = 1;
-        double currentInput;
-        ArrayList<Double> list = new ArrayList<>();
+        double currentInput, max = 0.0;
         scanner = new Scanner(System.in);
 
         do{
             System.out.print("Number " + counter + ": ");
             currentInput = scanner.nextDouble();
+            if(currentInput <= 0.0 && counter == 1){
+                System.out.println("No number entered.");
+                return;
+            }
             counter++;
-            if(currentInput > 0.0){
-                list.add(currentInput);
+
+            if(currentInput > max){
+                max = currentInput;
             }
         }while(currentInput > 0.0);
 
-        if(list.size() == 0){
-            System.out.println("No number entered.");
-        } else{
-            Collections.sort(list, Collections.reverseOrder());
-            double max = list.get(0);
-            String output = String.format("The largest number is %.2f", max);
-            System.out.println(output);
-        }
+        String output = String.format("The largest number is %.2f", max);
+        System.out.println(output);
 
     }
 
@@ -44,15 +42,15 @@ public class App {
 
         if(n < 1){
             System.out.println("Invalid number!");
-        } else{
-            int counter = 0;
-            for(int i=1; i<=n; i++){
-                for(int j=0; j<i; j++){
-                    counter++;
-                    System.out.print(counter + " ");
-                }
-                System.out.print(System.lineSeparator());
+            return;
+        }
+        int counter = 0;
+        for(int i=1; i<=n; i++){
+            for(int j=0; j<i; j++){
+                counter++;
+                System.out.print(counter + " ");
             }
+            System.out.print(System.lineSeparator());
         }
     }
 
@@ -70,7 +68,8 @@ public class App {
             arr[r] = '*';
             l--;
             r++;
-            System.out.println(arr);
+            String output = new String(arr).substring(0, r);
+            System.out.println(output);
         }
     }
 
@@ -116,12 +115,54 @@ public class App {
 
     //todo Task 5
     public void marks(){
-        // input your solution here
+        scanner = new Scanner(System.in);
+        double sum = 0.0;
+        int counter = 1, negatives = 0, input;
+
+        do{
+            System.out.print("Mark " + counter +": ");
+            input = scanner.nextInt();
+            if(input > 0 && input < 6){
+                sum += input;
+                counter++;
+            } else if(input > 6){
+                System.out.println("Invalid mark!");
+            }
+            if(input == 5){
+                negatives++;
+            }
+        }while(input != 0);
+
+        double avg = sum/(counter-1);
+        if(sum == 0){
+            avg = 0.0;
+        }
+        System.out.printf("Average: %.2f" + System.lineSeparator(), avg);
+        System.out.println("Negative marks: " + negatives);
     }
 
     //todo Task 6
     public void happyNumbers(){
-        // input your solution here
+        scanner = new Scanner(System.in);
+        System.out.print("n: ");
+        int n = scanner.nextInt(), sum=0;
+        int current = n;
+
+        do{
+            while(current > 0){
+                int h = current % 10;
+                sum += h*h;
+                current /= 10;
+            }
+            current = sum;
+            sum = 0;
+        }while(current != 1 && current != 4);
+
+        if(current == 1){
+            System.out.println("Happy number!");
+        } else {
+            System.out.println("Sad number!");
+        }
     }
 
     public static void main(String[] args){
