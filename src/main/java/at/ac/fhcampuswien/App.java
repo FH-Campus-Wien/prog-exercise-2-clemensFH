@@ -57,18 +57,15 @@ public class App {
     //todo Task 3
     public void printPyramid(){
         final int i = 6;
-        int length = i*2-1;
 
-        String line = "           "; // length Abstände
-        char[] arr = line.toCharArray();
-
-        int l = i-1, r = i-1;
-        for(int j=0; j<i; j++){
-            arr[l] = '*';
-            arr[r] = '*';
-            l--;
-            r++;
-            String output = new String(arr).substring(0, r);
+        for(int j=5, s=1; j>=0; j--, s+=2){
+            String output = "";
+            for(int space=0; space<j; space++){
+                output += " ";
+            }
+            for(int star=0; star<s; star++){
+                output += "*";
+            }
             System.out.println(output);
         }
     }
@@ -94,7 +91,7 @@ public class App {
         int l = h/2, r = h/2;
         char current;
         for(int i=0; i<h; i++){
-            if(i <= h/2){
+            if(i <= h/2){ // vor Hälfte
                 current = (char)((int)c - i);
                 arr[l] = current;
                 arr[r] = current;
@@ -102,7 +99,7 @@ public class App {
                 r++;
                 String output = new String(arr).substring(0, r);
                 System.out.println(output);
-            } else{
+            } else{ // nach Hälfte
                 l++;
                 r--;
                 arr[l] = ' ';
@@ -150,7 +147,7 @@ public class App {
 
         do{
             while(current > 0){
-                int h = current % 10;
+                int h = current % 10; // letzte Ziffer
                 sum += h*h;
                 current /= 10;
             }
